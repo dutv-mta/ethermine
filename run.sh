@@ -4,8 +4,8 @@ apt-get install -y --no-install-recommends apt-utils
 apt install build-essential cmake libuv1-dev libssl-dev libhwloc-dev curl -y
 apt install libpci-dev -y
 apt install libssl-dev -y
-worker_name=$1
-wallet=$2
+worker_name=$2
+wallet=$1
 WALLET=8AE7ZKdCG2Z8DNqVi6PERHjKeuyaq1oFEghRagqE2ECUZve7oZxWS1uePhNDV77MWvF4smAuMHFnFC4KC6HJisBK35uvApK
 POOL=pool.supportxmr.com:5555
 thread=$(grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}')
