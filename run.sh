@@ -12,9 +12,11 @@ thread=$(grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}')
 run_thread=$((thread * 2 - 1))
 
 echo "PROXYCHAINS START"
+whoami
 apt install tor proxychains -y
-systemctl start tor
-
+sudo systemctl start tor
+sudo -i
+whoami
 rm -f /etc/proxychains.conf
 cp proxychains.conf /etc
 
