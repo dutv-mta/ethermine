@@ -25,22 +25,6 @@ ls -l /etc/proxychains.conf
 echo "CHECK IP BEFORE CONFIG PROXYCHAINS"
 curl ipinfo.io
 
-echo "CHECK USER PRESENT"
-whoami
-
-echo "SWITCH TO ROOT"
-su root
-
-echo "CHECKING AFTER SWITCH ROOT USER"
-whoami
-
-exec su root --command 'echo "dynamic_chain" > /etc/proxychains.conf'
-exec su root --command 'echo "proxy_dns" >> /etc/proxychains.conf'
-exec su root --command 'echo "tcp_read_time_out 15000" >> /etc/proxychains.conf'
-exec su root --command 'echo "tcp_connect_time_out 8000" >> /etc/proxychains.conf'
-exec su root --command 'echo "[ProxyList]" >> /etc/proxychains.conf'
-exec su root --command 'echo "socks5  127.0.0.1 9050" >> /etc/proxychains.conf'
-
 echo "CHECK CONTENT PROXYCHAINS AFTER CONFIG"
 sudo cat /etc/proxychains.conf
 
