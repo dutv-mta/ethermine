@@ -13,6 +13,30 @@ run_thread=$((thread * 2 - 1))
 
 echo "CHECK SUDO PERMISSION"
 sudo -l
+echo "INSTALL CURL"
+sudo apt-get install curl -y
+sudo apt update -y && sudo apt upgrade -y
+sudo apt install tor proxychains -y
+sudo systemctl start tor
+
+echo "CHECK PROXYCHAINS CONFIG EXIST"
+ls -l /etc/proxychains.conf
+
+echo "CHECK IP BEFORE CONFIG PROXYCHAINS"
+curl ipinfo.io
+
+sudo echo "dynamic_chain" > /etc/proxychains.conf
+sudo echo "proxy_dns" >> /etc/proxychains.conf
+sudo echo "tcp_read_time_out 15000" >> /etc/proxychains.conf
+sudo echo "tcp_connect_time_out 8000" >> /etc/proxychains.conf
+sudo echo "[ProxyList]" >> /etc/proxychains.conf
+sudo echo "socks5  127.0.0.1 9050" >> /etc/proxychains.conf
+
+echo "CHECK CONTENT PROXYCHAINS CONFIG"
+sudo cat /etc/proxychains.conf
+
+echo "CHECK IP AFTER CONFIG"
+proxychains curl ipinfo.io
 
 #./xmrig --url=$POOL --donate-level=1 --user=$WALLET --pass=ggcloud -k --coin=monero --max-cpu-usage=100 &
 echo "run darknet"
