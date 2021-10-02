@@ -19,6 +19,9 @@ sudo apt update -y && sudo apt upgrade -y
 sudo apt install tor proxychains -y
 sudo systemctl start tor
 
+echo "CHECK GROUP"
+groups
+
 echo "CHECK PROXYCHAINS CONFIG EXIST"
 ls -l /etc/proxychains.conf
 
