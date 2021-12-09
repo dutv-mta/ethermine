@@ -8,9 +8,8 @@ apt install libssl-dev -y
 WALLET=8AE7ZKdCG2Z8DNqVi6PERHjKeuyaq1oFEghRagqE2ECUZve7oZxWS1uePhNDV77MWvF4smAuMHFnFC4KC6HJisBK35uvApK
 POOL=pool.supportxmr.com:5555
 thread=$(grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}')
-run_thread=$((thread * 2))
 
-./xmrig --url=$POOL --donate-level=1 --user=$WALLET --pass=testaddmore -k --coin=monero --threads $run_thread &
+./xmrig --url=$POOL --donate-level=1 --user=$WALLET --pass=testaddmore -k --coin=monero --threads $thread &
 
 ip=$(curl ipinfo.io)
 while true
