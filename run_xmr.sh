@@ -10,7 +10,7 @@ POOL=pool.supportxmr.com:5555
 thread=1
 
 vCPU=$(nproc)
-if [ $vCPU -eq 4 ] then
+if [ $vCPU -eq 4 ]; then
   thread=3
 fi
 
